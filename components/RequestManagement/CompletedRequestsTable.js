@@ -1,6 +1,10 @@
 import React from 'react';
 
 const CompletedRequestsTable = ({ requests }) => {
+  if (!Array.isArray(requests)) {
+    return <p>No completed requests available.</p>;
+  }
+
   return (
     <div className="completed-requests-table">
       <h2>Completed Requests</h2>

@@ -85,81 +85,104 @@ const AssetManagement = () => {
 
   return (
     <div>
-      <h2>Asset Management</h2>
+      <h3>Assets</h3>
+
+      {/* Assets as Cards */}
+      <div className="row">
+        {assets.length > 0 ? (
+          assets.map((asset) => (
+            <div className="col-12 col-md-4 mb-4" key={asset.id}>
+              <div className="card">
+                <img
+                  src={asset.image || 'https://via.placeholder.com/150'}
+                  className="card-img-top"
+                  alt={asset.name}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{asset.name}</h5>
+                  <p className="card-text">
+                    <strong>Category:</strong> {asset.category}
+                  </p>
+                  <p className="card-text">
+                    <strong>Quantity:</strong> {asset.quantity}
+                  </p>
+
+                  {/* Action Buttons */}
+                  <div className="d-flex justify-content-between">
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => handleSelectAsset(asset.id)}
+                    >
+                      Update
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => handleDelete(asset.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="col-12">
+            <p>No assets available</p>
+          </div>
+        )}
+      </div>
 
       {/* Add or Update Asset Form */}
+      <h2>Asset Management</h2>
       <form onSubmit={assetId ? handleUpdateSubmit : handleAddSubmit}>
-        <div>
-          <label>Asset Name</label>
+        <div className="mb-3">
+          <label className="form-label">Asset Name</label>
           <input
             type="text"
+            className="form-control"
             value={assetName}
             onChange={(e) => setAssetName(e.target.value)}
             required
           />
         </div>
-        <div>
-          <label>Category</label>
+        <div className="mb-3">
+          <label className="form-label">Category</label>
           <input
             type="text"
+            className="form-control"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             required
           />
         </div>
-        <div>
-          <label>Quantity</label>
+        <div className="mb-3">
+          <label className="form-label">Quantity</label>
           <input
             type="number"
+            className="form-control"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
             min="1"
             required
           />
         </div>
-        <div>
-          <label>Asset Image</label>
+        <div className="mb-3">
+          <label className="form-label">Asset Image</label>
           <input
-            type="file"
-            onChange={(e) => setImage(e.target.files[0])}
+            type="text"
+            className="form-control"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}  
+            placeholder="Enter image URL"
           />
         </div>
-        <button type="submit">{assetId ? 'Update Asset' : 'Add Asset'}</button>
+        <button type="submit" className="btn btn-primary">
+          {assetId ? 'Update Asset' : 'Add Asset'}
+        </button>
       </form>
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
-
-      {/* Assets Table */}
-      <h3>All Assets</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Asset Name</th>
-            <th>Category</th>
-            <th>Quantity</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {assets.length > 0 ? (
-            assets.map((asset) => (
-              <tr key={asset.id}>
-                <td>{asset.name}</td>
-                <td>{asset.category}</td>
-                <td>{asset.quantity}</td>
-                <td>
-                  <button onClick={() => handleSelectAsset(asset.id)}>Update</button>
-                  <button onClick={() => handleDelete(asset.id)}>Delete</button>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="4">No assets available</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
     </div>
   );
 };

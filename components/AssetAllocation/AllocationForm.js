@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import allocationLogic from '../DataLogic/allocationLogic'; // Import allocation logic
 import assetLogic from '../DataLogic/assetLogic'; // Import asset logic
-
+import './Allocate.css'
+ 
 const AllocationForm = ({ onAllocationSuccess }) => {
   const [assets, setAssets] = useState([]); // State for storing assets
   const [employees, setEmployees] = useState([]); // State for storing employees

@@ -3,7 +3,7 @@ import React from 'react';
 const RejectRequestModal = ({ request, onReject, onClose }) => {
   // Ensure request exists before accessing its properties
   if (!request) {
-    return  null; //iis not displaying for now but it insert h1 tag will show
+    return  <h1>Rejected Requests</h1>; //iis not displaying for now but it insert h1 tag will show
   }
 
   const handleReject = () => {

@@ -1,7 +1,4 @@
-/* eslint-disable import/no-anonymous-default-export */
-// assetLogic.js
 
-// Function to fetch all assets
 const getAssets = async () => {
   try {
     const response = await fetch('/api/assets');
@@ -23,7 +20,7 @@ const addAsset = async (assetData) => {
     return await response.json();  // Return the JSON response from the backend
   } catch (error) {
     console.error('Error adding asset:', error);
-    throw error;  // Re-throw the error to handle it in the component
+    throw error; 
   }
 };
 

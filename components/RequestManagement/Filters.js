@@ -2,7 +2,7 @@ import React from 'react';
 
 const Filters = ({ onFilterChange }) => {
   const handleFilterChange = (event) => {
-    onFilterChange(event.target.value); // Passing the selected filter value to the parent
+    onFilterChange(event.target.value); 
   };
 
   return (
