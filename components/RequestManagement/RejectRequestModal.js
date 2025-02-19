@@ -1,6 +1,11 @@
 import React from 'react';
 
 const RejectRequestModal = ({ request, onReject, onClose }) => {
+  // Ensure request exists before accessing its properties
+  if (!request) {
+    return  null; //iis not displaying for now but it insert h1 tag will show
+  }
+
   const handleReject = () => {
     onReject(request.id); // Pass request ID to the handler
     onClose(); // Close the modal

@@ -2,8 +2,12 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import AllocationForm from '../AssetAllocation/AllocationForm';
 import AssertAllocationTable from '../AssetAllocation/AssetAllocationTable';
-
-
+import AssetManagement from '../AssetManagement/AssetManagent';  
+// import PendingRequestTable from '../RequestManagement/PendingRequestsTable'
+import ApproveRequestModal from '../RequestManagement/ApproveRequestModal';
+//import Filter from '../RequestManagement/Filters';
+// import CompletedRequestsTable from '../RequestManagement/CompletedRequestsTable';
+import RejectedRequestModal from '../RequestManagement/RejectRequestModal'
 
 const DashboardLayout = () => {
   return (
@@ -13,6 +17,13 @@ const DashboardLayout = () => {
       <Sidebar />
       <AllocationForm />
       <AssertAllocationTable />
+      <AssetManagement />
+      {/* <PendingRequestTable /> */}
+      <ApproveRequestModal />
+      <RejectedRequestModal />
+      {/* <Filter /> */}
+      {/* <CompletedRequestsTable /> */}
+    
     </div>
   );
 };
