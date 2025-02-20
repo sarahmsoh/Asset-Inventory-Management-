@@ -1,48 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import allocationLogic from '../DataLogic/allocationLogic'; // Import allocation logic
-import assetLogic from '../DataLogic/assetLogic'; // Import asset logic
+import allocationLogic from '../DataLogic/allocationLogic'; 
+import assetLogic from '../DataLogic/assetLogic'; 
 import './Allocate.css'
  
 const AllocationForm = ({ onAllocationSuccess }) => {
-  const [assets, setAssets] = useState([]); // State for storing assets
-  const [employees, setEmployees] = useState([]); // State for storing employees
-  const [selectedAsset, setSelectedAsset] = useState(''); // State for selected asset
-  const [selectedEmployee, setSelectedEmployee] = useState(''); // State for selected employee
-  const [quantity, setQuantity] = useState(1); // State for selected quantity
+  const [assets, setAssets] = useState([]); 
+  const [employees, setEmployees] = useState([]); 
+  const [selectedAsset, setSelectedAsset] = useState(''); 
+  const [selectedEmployee, setSelectedEmployee] = useState('');
+  const [quantity, setQuantity] = useState(1); 
 
   useEffect(() => {
-    // Fetch assets and employees for the form
-
     // Fetch assets from backend
     assetLogic.getAssets()
-      .then((data) => setAssets(data || [])) // Ensure assets is always an array
+      .then((data) => setAssets(data || [])) 
       .catch((error) => console.error("Error fetching assets:", error));
 
     // Fetch employees from backend
-    fetch('/api/employees')  // Assuming this is the endpoint to fetch employee data
+    fetch('/api/employees') 
       .then((response) => response.json())
-      .then((data) => setEmployees(data || [])) // Ensure employees is always an array
+      .then((data) => setEmployees(data || [])) 
       .catch((error) => console.error("Error fetching employees:", error));
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Ensure selectedAsset and selectedEmployee are not empty before calling allocation
     if (selectedAsset && selectedEmployee) {
       allocationLogic.allocateAsset(selectedAsset, selectedEmployee, quantity)
         .then((response) => {
           if (response.success) {
             alert('Asset successfully allocated!');
 
-            // Pass the new allocation back to the parent to update the table
             const newAllocation = {
-              assetName: response.assetName,  // Assuming this data comes from the backend response
+              assetName: response.assetName, 
               employeeName: response.employeeName,
               quantity: response.quantity,
-              id: response.id,  // Assuming an ID is returned for the new allocation
+              id: response.id,  
             };
-            onAllocationSuccess(newAllocation);  // Pass new allocation to parent
+            onAllocationSuccess(newAllocation);  
           } else {
             alert('Error: ' + response.message);
           }

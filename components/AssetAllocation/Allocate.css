@@ -22,11 +22,13 @@ form {
     font-size: 24px;
     color: #333;
     margin-bottom: 20px;
+    margin-top: 60px;
   }
   
   /* Form Fields */
   div {
     margin-bottom: 15px;
+    margin-top: 50px;
   }
   
   /* Labels */

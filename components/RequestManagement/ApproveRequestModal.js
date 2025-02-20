@@ -1,75 +1,72 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';  
-import ApproveRequestModal from './ApproveRequestModal';
-import RejectRequestModal from './RejectRequestModal';
-import Filters from './Filters'; 
+import React, { useEffect, useState } from 'react';
+import ApproveRequest from './ApproveRequestModal';
+import RejectRequest from './RejectRequestModal';
+import Filters from './Filters';
 
-const PendingRequestsTable = ({ requests = [] }) => {
-  const navigate = useNavigate(); 
-  const [showApproveModal, setShowApproveModal] = useState(false);
-  const [showRejectModal, setShowRejectModal] = useState(false);
+const PendingRequestTable = () => {
+  const [requests, setRequests] = useState([]);
+  const [filteredRequests, setFilteredRequests] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
-  const [filteredRequests, setFilteredRequests] = useState(requests);
-  const [selectedFilter, setSelectedFilter] = useState('');
-
-  const handleFilterChange = (filter) => {
-    setSelectedFilter(filter);
-  };
+  const [actionType, setActionType] = useState("");
 
   useEffect(() => {
-    if (selectedFilter === '') {
-      setFilteredRequests(requests); 
+    fetch() // Adjust the API URL
+      .then(response => response.json())
+      .then(data => {
+        setRequests(data);
+        setFilteredRequests(data);
+      })
+      .catch(error => console.error("Error fetching requests:", error));
+  }, []);
+
+  const handleApprove = (requestId, comment) => {
+    setRequests(prev => prev.map(req => req.id === requestId ? { ...req, status: "approved" } : req));
+    setFilteredRequests(prev => prev.filter(req => req.id !== requestId));
+    console.log(`Request ${requestId} approved. Comment: ${comment}`);
+    setSelectedRequest(null);
+  };
+
+  const handleReject = (requestId, comment) => {
+    fetch("http://localhost:5000/rejectedRequests", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ requestId, comment })
+    })
+      .then(() => {
+        setRequests(prev => prev.filter(req => req.id !== requestId));
+        setFilteredRequests(prev => prev.filter(req => req.id !== requestId));
+        console.log(`Request ${requestId} rejected.`);
+        setSelectedRequest(null);
+      })
+      .catch(error => console.error("Error rejecting request:", error));
+  };
+
+  const handleFilterChange = (filter) => {
+    if (filter === '') {
+      setFilteredRequests(requests);
     } else {
-      setFilteredRequests(
-        requests.filter((request) => request.urgency === selectedFilter)
-      );
+      setFilteredRequests(requests.filter(request => request.urgency === filter));
     }
-  }, [selectedFilter, requests]);
-
-  const openApproveModal = (request) => {
-    setSelectedRequest(request);
-    setShowApproveModal(true);
-  };
-
-  const openRejectModal = (request) => {
-    setSelectedRequest(request);
-    setShowRejectModal(true);
-  };
-
-  const handleApprove = (requestId) => {
-    console.log('Request Approved:', requestId);
-    navigate('/approved', { state: { requestId, status: 'approved' } }); 
-
-    setShowApproveModal(false);
-  };
-
-  const handleReject = (requestId) => {
-    console.log('Request Rejected:', requestId);
-    navigate('/rejected', { state: { requestId, status: 'rejected' } }); 
-
-    setShowRejectModal(false);
   };
 
   return (
-    <div className="pending-requests-table">
+    <div>
       <h2>Pending Requests</h2>
       <Filters onFilterChange={handleFilterChange} />
-      {filteredRequests.length === 0 ? (
-        <p>No pending requests available</p>
-      ) : (
+      {filteredRequests.length === 0 ? <p>No pending requests.</p> : (
         <table>
           <thead>
             <tr>
-              <th>Request ID</th>
-              <th>Employee Name</th>
-              <th>Asset Type</th>
+              <th>ID</th>
+              <th>Employee</th>
+              <th>Asset</th>
               <th>Reason</th>
               <th>Urgency</th>
-              <th>Action</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {filteredRequests.map((request) => (
+            {filteredRequests.map(request => (
               <tr key={request.id}>
                 <td>{request.id}</td>
                 <td>{request.employeeName}</td>
@@ -77,32 +74,34 @@ const PendingRequestsTable = ({ requests = [] }) => {
                 <td>{request.reason}</td>
                 <td>{request.urgency}</td>
                 <td>
-                  <button onClick={() => openApproveModal(request)}>Approve</button>
-                  <button onClick={() => openRejectModal(request)}>Reject</button>
+                  <button onClick={() => { setSelectedRequest(request); setActionType("approve"); }}>Approve</button>
+                  <button onClick={() => { setSelectedRequest(request); setActionType("reject"); }}>Reject</button>
+                  <button>Pending</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
-
-      {showApproveModal && (
-        <ApproveRequestModal
-          request={selectedRequest}
-          onApprove={handleApprove}
-          onClose={() => setShowApproveModal(false)}
-        />
-      )}
-
-      {showRejectModal && (
-        <RejectRequestModal
-          request={selectedRequest}
-          onReject={handleReject}
-          onClose={() => setShowRejectModal(false)}
-        />
+      {selectedRequest && (
+        <div className="modal">
+          {actionType === "approve" ? (
+            <ApproveRequest 
+              request={selectedRequest} 
+              onApprove={handleApprove} 
+              onCancel={() => setSelectedRequest(null)} 
+            />
+          ) : (
+            <RejectRequest 
+              request={selectedRequest} 
+              onReject={handleReject} 
+              onCancel={() => setSelectedRequest(null)} 
+            />
+          )}
+        </div>
       )}
     </div>
   );
 };
 
-export default PendingRequestsTable;
+export default PendingRequestTable;

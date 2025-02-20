@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import assetLogic from '../DataLogic/assetLogic';  // Import default export
+import assetLogic from '../DataLogic/assetLogic'; 
 
 const AssetManagement = () => {
-  const [assets, setAssets] = useState([]); // State to store assets
-  const [assetId, setAssetId] = useState(null); // State to store the ID of the asset being updated
+  const [assets, setAssets] = useState([]); 
+  const [assetId, setAssetId] = useState(null); 
   const [assetName, setAssetName] = useState('');
   const [category, setCategory] = useState('');
   const [quantity, setQuantity] = useState(1);
@@ -32,7 +32,7 @@ const AssetManagement = () => {
     assetLogic.addAsset(assetData)
       .then((response) => {
         if (response.success) {
-          setAssets([...assets, response.asset]); // Add new asset to state
+          setAssets([...assets, response.asset]); 
           alert('Asset added successfully');
         }
       })
@@ -49,9 +49,9 @@ const AssetManagement = () => {
         if (response.success) {
           setAssets(
             assets.map((asset) => (asset.id === assetId ? response.asset : asset))
-          ); // Update asset in state
+          ); 
           alert('Asset updated successfully');
-          setAssetId(null); // Clear the assetId to switch back to adding mode
+          setAssetId(null); 
         }
       })
       .catch((error) => {
@@ -63,7 +63,7 @@ const AssetManagement = () => {
     assetLogic.deleteAsset(id)
       .then((response) => {
         if (response.success) {
-          setAssets(assets.filter((asset) => asset.id !== id)); // Remove deleted asset from state
+          setAssets(assets.filter((asset) => asset.id !== id)); 
           alert('Asset deleted successfully');
         }
       })

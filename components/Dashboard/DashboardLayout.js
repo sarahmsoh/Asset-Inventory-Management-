@@ -10,6 +10,7 @@ const DashboardLayout = () => {
         <p>Here you can manage all your assets and requests.</p>
       </div>
       <Sidebar />
+     
     </div>
   );
 };
