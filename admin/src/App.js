@@ -1,22 +1,20 @@
-import { Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './store';
-import LoginForm from './shared/Auth/LoginForm';
-import AdminLayout from './admin/components/AdminLayout';
-import ProtectedRoute from './shared/Auth/ProtectedRoute';
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
   return (
-    <Provider store={store}>
-      <Routes>
-        <Route path="/login" element={<LoginForm />} />
-        <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-          <Route element={<AdminLayout />}>
-            <Route path="/admin/dashboard" element={<Dashboard />} />
-            <Route path="/admin/assets" element={<AssetList />} />
-          </Route>
-        </Route>
-      </Routes>
-    </Provider>
+    // src/App.tsx (Admin Routes)
+<Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+  <Route path="/admin" element={<AdminDashboard />}>
+    <Route index element={<AdminDashboardHome />} />
+    <Route path="dashboard" element={<AdminDashboardHome />} />
+    <Route path="users" element={<UserManagement />} />
+    <Route path="assets" element={<AssetManagement />} />
+    <Route path="requests" element={<AllRequests />} />
+    <Route path="reports" element={<Reports />} />
+  </Route>
+</Route>
   );
 }
+
+export default App;
