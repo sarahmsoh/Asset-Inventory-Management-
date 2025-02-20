@@ -1,25 +1,20 @@
-// src/components/Admin/Sidebar.tsx
-import { NavLink } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
+// frontend/src/components/AdminDashboard.js
+import React from 'react';
+import { useSelector } from 'react-redux';
+import UserForm from './UserForm';
+import AssetForm from './AssetForm';
 
-const AdminSidebar = () => {
-  const { logout } = useAuth();
+const AdminDashboard = () => {
+  const { role } = useSelector((state) => state.auth);
+  if (role !== 'admin') return <p>Access Denied</p>;
 
   return (
-    <aside className="admin-sidebar">
-      <div className="sidebar-logo">Asset Manager</div>
-      <nav className="sidebar-nav">
-        <NavLink to="/admin/dashboard" end>Dashboard</NavLink>
-        <NavLink to="/admin/users">Manage Users</NavLink>
-        <NavLink to="/admin/assets">Assets Inventory</NavLink>
-        <NavLink to="/admin/requests">All Requests</NavLink>
-        <NavLink to="/admin/reports">Reports</NavLink>
-        <button onClick={logout} className="logout-btn">
-          Log Out
-        </button>
-      </nav>
-    </aside>
+    <div>
+      <h1>Admin Dashboard</h1>
+      <UserForm />
+      <AssetForm />
+    </div>
   );
 };
 
-export default AdminSidebar;
+export default AdminDashboard;
