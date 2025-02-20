@@ -1,13 +1,14 @@
-// frontend/src/pages/AdminAssets.js
+// src/pages/AdminAssets.js
 import React from 'react';
 import AssetForm from '../components/AssetForm';
 
 const AdminAssets = () => {
   return (
-    <div>
+    <div className="container my-4">
       <h1>Manage Assets</h1>
+      <p>Add new assets, update existing assets, and assign assets to departments.</p>
       <AssetForm />
-      {/* Add asset list display logic here if needed */}
+      {/* Placeholder for asset list or details */}
     </div>
   );
 };
