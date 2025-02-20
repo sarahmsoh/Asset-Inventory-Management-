@@ -16,13 +16,12 @@ function App() {
   const [allocations, setAllocations] = useState([]);  
 
   useEffect(() => {
-    // Fetch allocations when the component mounts
+    // Fetch allocations when the component 
     allocationLogic.getAllocations()
-      .then((data) => setAllocations(data || []))  // Ensure the data is always an array
+      .then((data) => setAllocations(data || []))  
       .catch((error) => console.error('Error fetching allocations:', error));
   }, []);
 
-  // Handle successful allocation from AllocationForm
   const handleAllocationSuccess = (newAllocation) => {
     setAllocations((prevAllocations) => [...prevAllocations, newAllocation]);
   };
@@ -35,7 +34,6 @@ function App() {
           path="/dashboard" 
           element={<DashboardLayout allocations={allocations} onAllocationSuccess={handleAllocationSuccess} />} 
         />
-        {/* Add other routes here */}
         <Route path="/approved" element={<ApprovedRequestsPage />} />
         <Route path="/rejected" element={<RejectedRequestsPage />} />
         <Route path="/allocation-assert" element={<AllocationForm />} />
