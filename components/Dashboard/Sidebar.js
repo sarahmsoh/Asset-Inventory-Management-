@@ -1,4 +1,5 @@
 import React from 'react';
+import ApproveRequestModal from '../RequestManagement/ApproveRequestModal';
 
 const Sidebar = () => {
   return (
@@ -12,9 +13,9 @@ const Sidebar = () => {
         <li><a href="/completed-requests">Completed Requests</a></li>
         <li><a href="/Rejected">Reject Request</a></li>
         <li><a href="/">Exit</a></li>
-
       </ul>
       </nav>
+      <ApproveRequestModal />
     </aside>
   );
 };

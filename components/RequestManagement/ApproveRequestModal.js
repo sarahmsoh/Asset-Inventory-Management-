@@ -1,107 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import ApproveRequest from './ApproveRequestModal';
-import RejectRequest from './RejectRequestModal';
-import Filters from './Filters';
+import React, { useState } from "react";
+import PendingRequestsTable from "./PendingRequestsTable";
 
-const PendingRequestTable = () => {
-  const [requests, setRequests] = useState([]);
-  const [filteredRequests, setFilteredRequests] = useState([]);
-  const [selectedRequest, setSelectedRequest] = useState(null);
-  const [actionType, setActionType] = useState("");
+const ApproveRequestPage = ({ request = {}, onApprove, onCancel }) => {
+  const [comment, setComment] = useState("");
 
-  useEffect(() => {
-    fetch() // Adjust the API URL
-      .then(response => response.json())
-      .then(data => {
-        setRequests(data);
-        setFilteredRequests(data);
-      })
-      .catch(error => console.error("Error fetching requests:", error));
-  }, []);
+  if (!request || Object.keys(request).length === 0) {
+    return <PendingRequestsTable />; // Don't render if request is undefined or empty
+  }
 
-  const handleApprove = (requestId, comment) => {
-    setRequests(prev => prev.map(req => req.id === requestId ? { ...req, status: "approved" } : req));
-    setFilteredRequests(prev => prev.filter(req => req.id !== requestId));
-    console.log(`Request ${requestId} approved. Comment: ${comment}`);
-    setSelectedRequest(null);
-  };
-
-  const handleReject = (requestId, comment) => {
-    fetch("http://localhost:5000/rejectedRequests", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ requestId, comment })
-    })
-      .then(() => {
-        setRequests(prev => prev.filter(req => req.id !== requestId));
-        setFilteredRequests(prev => prev.filter(req => req.id !== requestId));
-        console.log(`Request ${requestId} rejected.`);
-        setSelectedRequest(null);
-      })
-      .catch(error => console.error("Error rejecting request:", error));
-  };
-
-  const handleFilterChange = (filter) => {
-    if (filter === '') {
-      setFilteredRequests(requests);
-    } else {
-      setFilteredRequests(requests.filter(request => request.urgency === filter));
-    }
+  const handleApprove = () => {
+    onApprove(request.id, comment);
   };
 
   return (
-    <div>
-      <h2>Pending Requests</h2>
-      <Filters onFilterChange={handleFilterChange} />
-      {filteredRequests.length === 0 ? <p>No pending requests.</p> : (
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Employee</th>
-              <th>Asset</th>
-              <th>Reason</th>
-              <th>Urgency</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredRequests.map(request => (
-              <tr key={request.id}>
-                <td>{request.id}</td>
-                <td>{request.employeeName}</td>
-                <td>{request.assetType}</td>
-                <td>{request.reason}</td>
-                <td>{request.urgency}</td>
-                <td>
-                  <button onClick={() => { setSelectedRequest(request); setActionType("approve"); }}>Approve</button>
-                  <button onClick={() => { setSelectedRequest(request); setActionType("reject"); }}>Reject</button>
-                  <button>Pending</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-      {selectedRequest && (
-        <div className="modal">
-          {actionType === "approve" ? (
-            <ApproveRequest 
-              request={selectedRequest} 
-              onApprove={handleApprove} 
-              onCancel={() => setSelectedRequest(null)} 
-            />
-          ) : (
-            <RejectRequest 
-              request={selectedRequest} 
-              onReject={handleReject} 
-              onCancel={() => setSelectedRequest(null)} 
-            />
-          )}
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <h3>Approve Request</h3>
+        <p><strong>Employee:</strong> {request.employeeName || "N/A"}</p>
+        <p><strong>Asset:</strong> {request.assetType || "N/A"}</p>
+        <p><strong>Reason:</strong> {request.reason || "N/A"}</p>
+
+        <label>Approval Comment:</label>
+        <textarea 
+          value={comment} 
+          onChange={(e) => setComment(e.target.value)} 
+          placeholder="Enter approval comment (optional)"
+        />
+
+        <div className="modal-actions">
+          <button onClick={handleApprove}>Approve</button>
+          <button onClick={onCancel}>Cancel</button>
         </div>
-      )}
+      </div>
     </div>
   );
 };
 
-export default PendingRequestTable;
+export default ApproveRequestPage;
