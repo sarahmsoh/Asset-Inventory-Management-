@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ApproveRequestModal from './ApproveRequestModal';
 import RejectRequestModal from './RejectRequestModal';
-import Filters from './Filters'; // Import the Filters component
+import Filters from './Filters'; 
 
 const PendingRequestsTable = ({ requests = [] }) => {
   const [showApproveModal, setShowApproveModal] = useState(false);
@@ -13,15 +13,13 @@ const PendingRequestsTable = ({ requests = [] }) => {
   const [rejectedRequests, setRejectedRequests] = useState([]);
   const [pendingRequests, setPendingRequests] = useState(requests);
 
-  // Handle the filter change from the Filters component
   const handleFilterChange = (filter) => {
     setSelectedFilter(filter);
   };
 
-  // Apply filter based on selected filter
   useEffect(() => {
     if (selectedFilter === '') {
-      setFilteredRequests(pendingRequests); // No filter, show all requests
+      setFilteredRequests(pendingRequests); 
     } else {
       setFilteredRequests(
         pendingRequests.filter((request) => request.urgency === selectedFilter)
@@ -29,7 +27,6 @@ const PendingRequestsTable = ({ requests = [] }) => {
     }
   }, [selectedFilter, pendingRequests]);
 
-  // Open modals for Approve/Reject
   const openApproveModal = (request) => {
     setSelectedRequest(request);
     setShowApproveModal(true);
@@ -40,47 +37,37 @@ const PendingRequestsTable = ({ requests = [] }) => {
     setShowRejectModal(true);
   };
 
-  // Handle approve action
   const handleApprove = (requestId) => {
     const updatedRequest = filteredRequests.find((request) => request.id === requestId);
-    updatedRequest.status = 'approved'; // Update the request status
+    updatedRequest.status = 'approved'; 
 
-    // Move the request to the approved list
     setApprovedRequests([...approvedRequests, updatedRequest]);
 
-    // Remove it from the pending list
     setPendingRequests(pendingRequests.filter((request) => request.id !== requestId));
     
     console.log('Request Approved:', requestId);
     setShowApproveModal(false);
   };
 
-  // Handle reject action
   const handleReject = (requestId) => {
     const updatedRequest = filteredRequests.find((request) => request.id === requestId);
-    updatedRequest.status = 'rejected'; // Update the request status
+    updatedRequest.status = 'rejected'; 
 
-    // Move the request to the rejected list
     setRejectedRequests([...rejectedRequests, updatedRequest]);
 
-    // Remove it from the pending list
     setPendingRequests(pendingRequests.filter((request) => request.id !== requestId));
     
     console.log('Request Rejected:', requestId);
     setShowRejectModal(false);
   };
 
-  // Handle the "Pending" button click (if needed, for your use case)
   const handlePending = (requestId) => {
     console.log('Request set to Pending:', requestId);
-    // You can either leave it in the pending list or reassign it based on your logic
   };
 
   return (
     <div className="pending-requests-table">
       <h2>Pending Requests</h2>
-
-      {/* Filters component for handling urgency filtering */}
       <Filters onFilterChange={handleFilterChange} />
 
       {/* Display message if no requests */}
@@ -117,7 +104,6 @@ const PendingRequestsTable = ({ requests = [] }) => {
         </table>
       )}
 
-      {/* Approve Request Modal */}
       {showApproveModal && (
         <ApproveRequestModal
           request={selectedRequest}

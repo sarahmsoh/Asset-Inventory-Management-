@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 const AssetAllocationTable = ({ allocations }) => {
   useEffect(() => {
-    console.log("Allocations Data:", allocations); // Debug line to check allocations
+    console.log("Allocations Data:", allocations);
   }, [allocations]);
 
   if (!Array.isArray(allocations)) {

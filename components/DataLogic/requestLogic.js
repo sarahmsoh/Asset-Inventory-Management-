@@ -1,6 +1,4 @@
-// requestLogic.js
 
-// Function to create a new request
 const createRequest = async (requestData) => {
   try {
     const response = await fetch('/api/requests', {
@@ -14,7 +12,7 @@ const createRequest = async (requestData) => {
   }
 };
 
-// Function to approve a request
+
 const approveRequest = async (requestId) => {
   try {
     const response = await fetch(`/api/requests/approve/${requestId}`, {
@@ -26,15 +24,16 @@ const approveRequest = async (requestId) => {
   }
 };
 
-// Function to reject a request
-const rejectRequest = (requestId) => {
-  return fetch(`/api/requests/reject/${requestId}`, {
-    method: 'PUT',
-  })
-    .then(response => response.json())
-    .catch(error => {
-      console.error('Error rejecting request:', error);
+
+const rejectRequest = async (requestId) => {
+  try {
+    const response = await fetch(`/api/requests/reject/${requestId}`, {
+      method: 'PUT',
     });
+    return await response.json();
+  } catch (error) {
+    console.error('Error rejecting request:', error);
+  }
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export

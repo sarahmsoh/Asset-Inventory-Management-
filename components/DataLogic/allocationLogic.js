@@ -1,4 +1,3 @@
-// allocationLogic.js
 
 export const allocateAsset = async (assetId, employeeId, quantity) => {
   try {

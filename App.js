@@ -38,10 +38,8 @@ function App() {
         {/* Add other routes here */}
         <Route path="/approved" element={<ApprovedRequestsPage />} />
         <Route path="/rejected" element={<RejectedRequestsPage />} />
-        
-        {/* Wrap these components in <Route> */}
-        <Route path="/allocation-form" element={<AllocationForm />} />
-        <Route path="/asset-allocation-table" element={<AssertAllocationTable />} />
+        <Route path="/allocation-assert" element={<AllocationForm />} />
+        <Route path="/asset-allocated" element={<AssertAllocationTable />} />
         <Route path="/manage-assets" element={<AssetManagement />} />
         <Route path="/pending-requests" element={<PendingRequestsTable />} />
         
