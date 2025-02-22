@@ -1,43 +1,46 @@
-// src/components/UserForm.js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addUser } from '../redux/usersSlice'; // Updated import
+import { addUser } from '../redux/usersSlice';
 
 const UserForm = () => {
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({ username: '', password: '', role: 'employee' });
+  const [formData, setFormData] = useState({ username: '', role: 'employee' });
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(addUser(formData));
-    setFormData({ username: '', password: '', role: 'employee' });
+    if (!formData.username.trim()) {
+      setError('Username is required.');
+      return;
+    }
+    try {
+      await dispatch(addUser(formData)).unwrap();
+      setFormData({ username: '', role: 'employee' });
+      setError(null);
+    } catch (err) {
+      setError('Failed to add user. Please try again.');
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="mt-3">
+      {error && <div className="alert alert-danger">{error}</div>}
       <div className="mb-3">
-        <label className="form-label">Username</label>
+        <label htmlFor="username" className="form-label">Username</label>
         <input
+          id="username"
           type="text"
           className="form-control"
           value={formData.username}
           onChange={(e) => setFormData({ ...formData, username: e.target.value })}
           placeholder="Enter username"
+          required
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">Password</label>
-        <input
-          type="password"
-          className="form-control"
-          value={formData.password}
-          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-          placeholder="Enter password"
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">Role</label>
+        <label htmlFor="role" className="form-label">Role</label>
         <select
+          id="role"
           className="form-select"
           value={formData.role}
           onChange={(e) => setFormData({ ...formData, role: e.target.value })}

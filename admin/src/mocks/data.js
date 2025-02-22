@@ -1,4 +1,3 @@
-// src/mocks/data.js
 export const mockAssets = [
     {
       id: 1,
@@ -9,7 +8,7 @@ export const mockAssets = [
       purchaseDate: '2023-01-15',
       assignedTo: 'user1',
       imageUrl: '',
-      warrantyExpiry: '2025-01-15'
+      warrantyExpiry: '2025-01-15',
     },
     {
       id: 2,
@@ -20,8 +19,8 @@ export const mockAssets = [
       purchaseDate: '2022-11-01',
       assignedTo: null,
       imageUrl: '',
-      warrantyExpiry: '2027-11-01'
-    }
+      warrantyExpiry: '2027-11-01',
+    },
   ];
   
   export const mockRequests = [
@@ -33,7 +32,7 @@ export const mockAssets = [
       urgency: 'high',
       status: 'pending',
       reason: 'Need laptop for new hire',
-      createdAt: '2023-07-20'
+      createdAt: '2023-07-20',
     },
     {
       id: 2,
@@ -43,27 +42,25 @@ export const mockAssets = [
       urgency: 'medium',
       status: 'approved',
       reason: 'Keyboard not working',
-      createdAt: '2023-07-18'
-    }
+      createdAt: '2023-07-18',
+    },
   ];
   
   export const mockUsers = [
     {
-        id: 'user1',
-        username: 'admin', // Add username
-        password: 'admin13', // Add password
-        name: 'John Doe',
-        role: 'admin',
-        department: 'Engineering'
+      id: 'user1',
+      username: 'john_doe',
+      name: 'John Doe',
+      role: 'admin',
+      department: 'Engineering',
     },
     {
       id: 'user2',
+      username: 'jane_smith',
       name: 'Jane Smith',
-      username: 'admin', // Add username
-      password: 'admin12', // Add password
       role: 'procurement',
-      department: 'Operations'
-    }
+      department: 'Operations',
+    },
   ];
   
   export const mockDepartments = ['Engineering', 'Operations', 'HR'];

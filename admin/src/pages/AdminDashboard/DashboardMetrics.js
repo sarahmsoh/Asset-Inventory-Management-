@@ -1,9 +1,6 @@
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faBox, faTicketAlt, faDollarSign, faExclamationTriangle 
-} from '@fortawesome/free-solid-svg-icons';
 
 const MetricCard = ({ icon, title, value, variant }) => (
   <Card className={`border-${variant} shadow-sm`}>
@@ -24,7 +21,7 @@ const MetricCard = ({ icon, title, value, variant }) => (
 const DashboardMetrics = ({ metrics }) => (
   <Row className="mb-4 g-4">
     {metrics.map((metric, index) => (
-      <Col key={index} xs={12} md={6} lg={3}>
+      <Col key={index} xs={12} md={6} lg={4}>
         <MetricCard {...metric} />
       </Col>
     ))}
