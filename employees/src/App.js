@@ -1,7 +1,7 @@
 import React from 'react';
-import './App.css'; // Import any custom styling if needed
-import RequestForm from './RequestForm'; // Import the RequestForm component
-import EmployeeDashboard from './EmployeeDashboard';
+import './App.css';
+import RequestForm from './components/RequestForm';
+import EmployeeDashboard from './components/EmployeeDashboard';
 
 function App() {
   return (
