@@ -1,7 +1,7 @@
 // src/components/UserForm.js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addUser } from '../redux/adminSlice';
+import { addUser } from '../redux/usersSlice'; // Updated import
 
 const UserForm = () => {
   const dispatch = useDispatch();

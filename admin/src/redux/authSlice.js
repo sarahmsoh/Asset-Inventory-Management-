@@ -1,15 +1,23 @@
 // frontend/src/redux/authSlice.js
 import { createSlice } from '@reduxjs/toolkit';
+import { mockUsers } from '../mocks/data';
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: { token: null, role: null },
+  initialState: { 
+    user: null,
+    token: null,
+    role: null
+  },
   reducers: {
     setCredentials: (state, action) => {
+      const user = mockUsers.find(u => u.id === action.payload.userId);
+      state.user = user;
+      state.role = user?.role;
       state.token = action.payload.token;
-      state.role = action.payload.role;
     },
     logout: (state) => {
+      state.user = null;
       state.token = null;
       state.role = null;
     },

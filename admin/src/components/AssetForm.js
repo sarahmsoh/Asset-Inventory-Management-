@@ -1,7 +1,7 @@
 // frontend/src/components/AssetForm.js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addAsset } from '../redux/adminSlice';
+import { addAsset } from '../redux/assetsSlice'; // Updated import
 
 const AssetForm = () => {
   const dispatch = useDispatch();
