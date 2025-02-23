@@ -1,25 +1,40 @@
 import React from 'react';
-import './App.css';
-import RequestForm from './components/RequestForm';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
 import EmployeeDashboard from './components/EmployeeDashboard';
+import RequestAsset from './components/RequestForm';
+import RequestRepair from './components/RepairForm';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Requests from './components/Requests';  // Import Requests page
+import Repairs from './components/Repairs';    // Import Repairs page
+import Assets from './components/Assets';      // Import Assets page
+import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Request Form</h1>
-        <p>Please fill out the form below:</p>
-      </header>
+    <Router>
+      <Navbar />
+      <Sidebar />
 
-      <main>
+      <div className="main-content" style={{ marginLeft: '250px', padding: '20px' }}>
+        <Routes>
+          {/* Main Routes */}
+          <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
+          <Route path="/requestform" element={<RequestAsset />} />
+          <Route path="/RepairForm" element={<RequestRepair />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Signup" element={<Signup />} />
 
-        <EmployeeDashboard />
-        <RequestForm />
-        <p>Thank you for your request!</p>
-
-      </main>
-    </div>
+          {/* Additional Routes for Requests, Repairs, and Assets */}
+          <Route path="/requests" element={<Requests />} /> {/* Requests page */}
+          <Route path="/repairs" element={<Repairs />} />   {/* Repairs page */}
+          <Route path="/assets" element={<Assets />} />     {/* Assets page */}
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
