@@ -1,12 +1,16 @@
-// frontend/src/redux/store.js
+// src/redux/store.js
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
-import adminReducer from './adminSlice';
+import assetsReducer from './assetsSlice';
+import requestsReducer from './requestsSlice';
+import usersReducer from './usersSlice';
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    admin: adminReducer,
+    assets: assetsReducer,
+    requests: requestsReducer,
+    users: usersReducer
   },
 });
 
