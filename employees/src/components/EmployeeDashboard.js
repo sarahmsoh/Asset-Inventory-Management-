@@ -1,54 +1,83 @@
-// src/pages/EmployeeDashboard.js
-import React, { useState, useEffect } from 'react';
-import { getEmployeeRequests } from './api.js';
+// src/components/Dashboard.js
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; // Import Link component for navigation
+import { fetchRequests, fetchRepairs, fetchAllocatedAssets } from "./api";
+import RequestCard from "./RequestCard";
 
-const EmployeeDashboard = () => {
+const Dashboard = () => {
   const [requests, setRequests] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [repairs, setRepairs] = useState([]);
+  const [assets, setAssets] = useState([]);
 
   useEffect(() => {
-    const fetchRequests = async () => {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        setError('You must be logged in to view your requests.');
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const data = await getEmployeeRequests(token);
-        setRequests(data);
-      } catch (err) {
-        setError('Failed to fetch requests: ' + err.message);
-      } finally {
-        setLoading(false);
-      }
+    const fetchData = async () => {
+      const requestsData = await fetchRequests();
+      const repairsData = await fetchRepairs();
+      const assetsData = await fetchAllocatedAssets();
+      setRequests(requestsData);
+      setRepairs(repairsData);
+      setAssets(assetsData);
     };
 
-    fetchRequests();
+    fetchData();
   }, []);
 
   return (
     <div>
-      <h2>Your Asset Requests</h2>
-      {loading && <p>Loading requests...</p>}
-      {error && <p>{error}</p>}
-      <ul>
-        {requests.length > 0 ? (
-          requests.map((request) => (
-            <li key={request.id}>
-              <p>Reason: {request.reason}</p>
-              <p>Status: {request.status}</p>
-              <p>Urgency: {request.urgency}</p>
-            </li>
-          ))
+      <h1>Employee Dashboard</h1>
+
+      {/* Section for Requests */}
+      <section>
+        <h2>Requests</h2>
+        <Link to="/requests">
+          <button>View All Requests</button>
+        </Link>
+        {requests.length === 0 ? (
+          <p>No requests available.</p>
         ) : (
-          <p>No requests found.</p>
+          requests.map((request) => <RequestCard key={request.id} request={request} />)
         )}
-      </ul>
+      </section>
+
+      {/* Section for Repairs */}
+      <section>
+        <h2>Repairs</h2>
+        <Link to="/repairs">
+          <button>View All Repairs</button>
+        </Link>
+        {repairs.length === 0 ? (
+          <p>No repair requests available.</p>
+        ) : (
+          <ul>
+            {repairs.map((repair) => (
+              <li key={repair.id}>
+                <strong>{repair.asset}</strong>: {repair.status} (Completion Date: {repair.completionDate})
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      {/* Section for Allocated Assets */}
+      <section>
+        <h2>Allocated Assets</h2>
+        <Link to="/assets">
+          <button>View All Assets</button>
+        </Link>
+        {assets.length === 0 ? (
+          <p>No assets allocated.</p>
+        ) : (
+          <ul>
+            {assets.map((asset) => (
+              <li key={asset.id}>
+                <strong>{asset.assetName}</strong>: Allocated on {asset.allocationDate} (Status: {asset.status})
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </div>
   );
 };
 
-export default EmployeeDashboard;
+export default Dashboard;
