@@ -1,6 +1,5 @@
-// src/components/Navbar.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -8,25 +7,25 @@ const Navbar = () => {
       <div className="container-fluid text-center">
         <ul className="list-inline mb-0">
           <li className="list-inline-item mx-2">
-            <Link className="text-decoration-none" to="/admin/dashboard">Dashboard</Link>
+            <NavLink className="text-decoration-none" activeClassName="fw-bold" to="/admin/dashboard">Dashboard</NavLink>
           </li>
           <li className="list-inline-item mx-2">
-            <Link className="text-decoration-none" to="/admin/users">Users</Link>
+            <NavLink className="text-decoration-none" activeClassName="fw-bold" to="/admin/users">Users</NavLink>
           </li>
           <li className="list-inline-item mx-2">
-            <Link className="text-decoration-none" to="/admin/assets">Assets</Link>
+            <NavLink className="text-decoration-none" activeClassName="fw-bold" to="/admin/assets">Assets</NavLink>
           </li>
           <li className="list-inline-item mx-2">
-            <Link className="text-decoration-none" to="/admin/requests">Requests</Link>
+            <NavLink className="text-decoration-none" activeClassName="fw-bold" to="/admin/requests">Requests</NavLink>
           </li>
           <li className="list-inline-item mx-2">
-            <Link className="text-decoration-none" to="/admin/audit-logs">Audit Logs</Link>
+            <NavLink className="text-decoration-none" activeClassName="fw-bold" to="/admin/audit-logs">Audit Logs</NavLink>
           </li>
           <li className="list-inline-item mx-2">
-            <Link className="text-decoration-none" to="/admin/system-config">System Config</Link>
+            <NavLink className="text-decoration-none" activeClassName="fw-bold" to="/admin/system-config">System Config</NavLink>
           </li>
           <li className="list-inline-item mx-2">
-            <Link className="text-decoration-none" to="/admin/reports">Reports</Link>
+            <NavLink className="text-decoration-none" activeClassName="fw-bold" to="/admin/reports">Reports</NavLink>
           </li>
         </ul>
       </div>
