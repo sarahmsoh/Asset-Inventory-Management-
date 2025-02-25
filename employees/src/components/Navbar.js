@@ -1,13 +1,15 @@
 // src/components/Navbar.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
-  // const handleLogout = () => {
-  //   localStorage.removeItem('token');
-  //   window.location.href = '/';  // Redirect to login page (if necessary)
-  // };
+  const navigate = useNavigate(); // Hook for navigation
+
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Clear stored token (if any)
+    navigate('/'); // Redirect to homepage
+  };
 
   return (
     <nav>
@@ -17,7 +19,8 @@ const Navbar = () => {
       <Link to="/requestform">Request Asset</Link>
       <Link to="/RepairForm">Request Repair</Link> */}
 
-      {/* <button onClick={handleLogout}>Logout</button> */}
+      {/* Logout Button */}
+      <button onClick={handleLogout} className="logout-button">Logout</button>
     </nav>
   );
 };

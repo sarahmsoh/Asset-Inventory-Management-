@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Sidebar from './components/Sidebar';
+// import Navbar from './components/Navbar';
+// import Sidebar from './components/Sidebar';
 import EmployeeDashboard from './components/EmployeeDashboard';
 import RequestAsset from './components/RequestForm';
 import RequestRepair from './components/RepairForm';
@@ -11,12 +11,16 @@ import Requests from './components/Requests';  // Import Requests page
 import Repairs from './components/Repairs';    // Import Repairs page
 import Assets from './components/Assets';      // Import Assets page
 import './App.css';
+import Home from './components/Home';
 
 const App = () => {
   return (
     <Router>
-      <Navbar />
-      <Sidebar />
+
+      <Home />
+
+      {/* <Navbar />
+      <Sidebar /> */}
 
       <div className="main-content" style={{ marginLeft: '250px', padding: '20px' }}>
         <Routes>

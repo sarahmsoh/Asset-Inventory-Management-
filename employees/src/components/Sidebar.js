@@ -3,11 +3,6 @@ import { Link } from 'react-router-dom';
 import './Sidebar.css';  // Ensure the necessary CSS for styling is imported
 
 const Sidebar = () => {
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    window.location.href = '/';  // Redirect to the login page
-  };
-
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -34,9 +29,6 @@ const Sidebar = () => {
           <Link to="/assets" className="sidebar-link">Assets</Link>
         </li>
       </ul>
-
-      {/* Logout Button */}
-      <button className="logout-btn" onClick={handleLogout}>Logout</button>
     </div>
   );
 }

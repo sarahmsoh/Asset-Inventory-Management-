@@ -13,20 +13,16 @@ body {
 
 /* Signup Container */
 .signup-container {
-  max-width: 650px;
-  width: 100%;  /* Ensure it takes full width up to max-width */
+  max-width: 450px;
+  width: 100%;
   margin: 10px auto;
-  padding: 60px;
+  padding: 40px;
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 100px 30px rgba(23, 121, 212, 0.1); /* Light blue shadow */
-  font-family: 'Arial', sans-serif;
-  color: #333;
+  box-shadow: 0 10px 30px rgba(23, 121, 212, 0.1);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  min-height: 500px;  /* Ensure form takes some minimum height */
   text-align: center;
 }
 
@@ -34,20 +30,22 @@ body {
 h1 {
   font-size: 28px;
   color: #4CAF50;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-weight: bold;
   text-transform: uppercase;
 }
 
 /* Form Group */
 .form-group {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+  width: 100%;
+  position: relative;
 }
 
 /* Label Styling */
 label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-weight: bold;
   font-size: 16px;
   color: #555;
@@ -55,9 +53,10 @@ label {
 
 /* Input Fields */
 input[type="text"],
+input[type="text"],
 input[type="email"],
 input[type="password"] {
-  width: 100%;
+  width: 90%;
   height: 45px;
   padding: 10px;
   font-size: 16px;
@@ -65,9 +64,11 @@ input[type="password"] {
   border-radius: 5px;
   background-color: #f8f8f8;
   transition: border 0.3s ease, box-shadow 0.3s ease;
+  padding-right: 40px; /* Space for toggle button */
 }
 
 /* Input Focus Effects */
+input[type="text"]:focus,
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
@@ -79,22 +80,25 @@ input[type="password"]:focus {
 /* Password Toggle Button */
 .password-toggle {
   position: absolute;
+  /* right: 30px; */
+  left: 100px;
   top: 50%;
-  right: 15px;
   transform: translateY(-50%);
-  background-color: #4CAF50;
-  color: #fff;
-  padding: 8px 15px;
+  background: none;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s ease;
+  cursor: pointer;
+  color: hwb(132 15% 23%);
+  transition: color 0.3s ease;
 }
 
 /* Password Toggle Hover */
 .password-toggle:hover {
-  background-color: #388e3c;
+  color: hsl(160, 89%, 26%);
+  /* left: 10px;
+  top: 50%; */
+  /* width: 20px; */
+
 }
 
 /* Submit Button */
@@ -120,23 +124,26 @@ button[type="submit"]:active {
   transform: translateY(2px);
 }
 
-/* Position for password toggle */
-.relative {
-  position: relative;
+/* Already have an account text */
+p {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+p a {
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+p a:hover {
+  text-decoration: underline;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-  .signup-container {
-    margin: 20px auto;
-    padding: 20px;
-  }
-}
-
 @media (max-width: 480px) {
   .signup-container {
-    margin: 15px auto;
-    padding: 15px;
+    padding: 20px;
   }
   input[type="text"],
   input[type="email"],
@@ -146,6 +153,5 @@ button[type="submit"]:active {
   }
   .password-toggle {
     font-size: 14px;
-    padding: 5px 10px;
   }
 }
