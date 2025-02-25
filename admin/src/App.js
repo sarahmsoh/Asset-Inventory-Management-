@@ -13,7 +13,7 @@ import Reports from './pages/Reports';
 const AdminLayout = () => (
   <div>
     <Header />
-    <div className="container-fluid">
+    <div className="container-fluid" style={{ paddingTop: '120px' }}>
       <div className="row">
         <div className="col-2 p-0">
           <Sidebar />

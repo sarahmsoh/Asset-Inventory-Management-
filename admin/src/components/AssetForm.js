@@ -84,20 +84,6 @@ const AssetForm = () => {
         </select>
       </div>
       <div className="mb-3">
-        <label htmlFor="urgency" className="form-label">Urgency Level</label>
-        <select
-          id="urgency"
-          className="form-select"
-          value={formData.urgency}
-          onChange={(e) => setFormData({ ...formData, urgency: e.target.value })}
-          required
-        >
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-        </select>
-      </div>
-      <div className="mb-3">
         <label htmlFor="image_url" className="form-label">Image URL (optional)</label>
         <input
           id="image_url"

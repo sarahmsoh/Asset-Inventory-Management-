@@ -1,75 +1,74 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTachometerAlt, faBox, faUsers, faFileAlt, faCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { FaUserCircle, FaSignOutAlt, FaTachometerAlt, FaUsers, FaBox, FaFileAlt, FaHistory, FaCog } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/authSlice';
+import './Sidebar.css';
+
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+  // Replace with dynamic user data if available
+  const userName = "John Doe";
+
+  const handleLogout = () => {
+    dispatch(logout());
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
   return (
-    <div className="d-flex flex-column vh-100 border-end bg-light">
-      <div className="p-3">
-        <h4>Admin Panel</h4>
+    <div className="d-flex flex-column vh-100 bg-light">
+      {/* Navigation Items */}
+      <div className="p-3 flex-grow-1">
+        <ul className="nav flex-column">
+          <li className="nav-item mb-2">
+            <NavLink to="/admin/dashboard" className="nav-link">
+              <FaTachometerAlt className="me-2" />
+              Dashboard
+            </NavLink>
+          </li>
+          <li className="nav-item mb-2">
+            <NavLink to="/admin/users" className="nav-link">
+              <FaUsers className="me-2" />
+              Users
+            </NavLink>
+          </li>
+          <li className="nav-item mb-2">
+            <NavLink to="/admin/assets" className="nav-link">
+              <FaBox className="me-2" />
+              Assets
+            </NavLink>
+          </li>
+          <li className="nav-item mb-2">
+            <NavLink to="/admin/requests" className="nav-link">
+              <FaFileAlt className="me-2" />
+              Requests
+            </NavLink>
+          </li>
+          <li className="nav-item mb-2">
+            <NavLink to="/admin/system-config" className="nav-link">
+              <FaCog className="me-2" />
+              System Config
+            </NavLink>
+          </li>
+        </ul>
       </div>
-      <ul className="nav nav-pills flex-column mb-auto p-3">
-        <li className="nav-item mb-2">
-          <Link to="/admin/dashboard" className="nav-link">
-            <FontAwesomeIcon icon={faTachometerAlt} className="me-2" /> Dashboard
-          </Link>
-        </li>
-        <li className="nav-item mb-2">
-          <span className="nav-link disabled">Assets Management</span>
-          <ul className="nav flex-column ms-3">
-            <li className="nav-item">
-              <Link to="/admin/assets" className="nav-link">
-                <FontAwesomeIcon icon={faBox} className="me-2" /> List Assets
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/admin/assets/add" className="nav-link">
-                <FontAwesomeIcon icon={faBox} className="me-2" /> Add Asset
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/admin/assets/categories" className="nav-link">
-                <FontAwesomeIcon icon={faBox} className="me-2" /> Categories
-              </Link>
-            </li>
-          </ul>
-        </li>
-        <li className="nav-item mb-2">
-          <span className="nav-link disabled">Requests</span>
-          <ul className="nav flex-column ms-3">
-            <li className="nav-item">
-              <Link to="/admin/requests/pending" className="nav-link">
-                <FontAwesomeIcon icon={faFileAlt} className="me-2" /> Pending Requests
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/admin/requests/completed" className="nav-link">
-                <FontAwesomeIcon icon={faFileAlt} className="me-2" /> Completed Requests
-              </Link>
-            </li>
-          </ul>
-        </li>
-        <li className="nav-item mb-2">
-          <Link to="/admin/users" className="nav-link">
-            <FontAwesomeIcon icon={faUsers} className="me-2" /> User Management
-          </Link>
-        </li>
-        <li className="nav-item mb-2">
-          <Link to="/admin/reports" className="nav-link">
-            <FontAwesomeIcon icon={faFileAlt} className="me-2" /> Reports
-          </Link>
-        </li>
-        <li className="nav-item mb-2">
-          <Link to="/admin/settings" className="nav-link">
-            <FontAwesomeIcon icon={faCog} className="me-2" /> Settings
-          </Link>
-        </li>
-      </ul>
-      <div className="p-3 mt-auto">
-        <button className="btn btn-danger w-100" disabled>
-          <FontAwesomeIcon icon={faSignOutAlt} className="me-2" /> Logout (Disabled)
-        </button>
+
+      {/* Profile Section at the Bottom */}
+      <div className="p-3 border-top">
+        <div className="d-flex align-items-center">
+          <FaUserCircle size={40} className="me-2" />
+          <div className="flex-grow-1">
+            <div className="fw-bold">{userName}</div>
+            <button onClick={handleLogout} className="btn btn-sm btn-danger mt-1">
+              <FaSignOutAlt className="me-1" />
+              Logout
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

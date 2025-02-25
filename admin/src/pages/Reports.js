@@ -1,44 +1,32 @@
-import React from 'react';
-import { Button, Card } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+// import React from 'react';
+// import { Card, Button } from 'react-bootstrap';
 
-const Reports = () => {
-  const { assets, requests } = useSelector((state) => ({
-    assets: state.assets.items || [],
-    requests: state.requests.items || [],
-  }));
+// const SimpleReportCard = () => {
+//   // Sample data for the report
+//   const reportData = {
+//     title: "Monthly Sales Report",
+//     summary: "Total sales for the month of January 2023",
+//     value: "$25,000",
+//     change: "+5% from last month"
+//   };
 
-  const handleExport = (format, reportType) => {
-    console.log(`Exporting ${reportType} report to ${format}`);
-    // Placeholder for CSV/PDF export logic
-  };
+//   return (
+//     <Card style={{ width: '18rem', margin: '20px' }}>
+//       <Card.Body>
+//         <Card.Title>{reportData.title}</Card.Title>
+//         <Card.Text>
+//           {reportData.summary}
+//         </Card.Text>
+//         <Card.Text style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+//           {reportData.value}
+//         </Card.Text>
+//         <Card.Text>
+//           {reportData.change}
+//         </Card.Text>
+//         <Button variant="primary">View Details</Button>
+//       </Card.Body>
+//     </Card>
+//   );
+// };
 
-  const reports = [
-    { title: 'Asset Depreciation', description: 'Depreciation status of all assets' },
-    { title: 'Request Analysis', description: 'Department-wise request summary' },
-    { title: 'Maintenance Trends', description: 'Trends in maintenance costs' },
-  ];
-
-  return (
-    <div className="container my-4">
-      <h1>Reports & Analytics</h1>
-      <p>Generate reports and view analytics for asset usage, pending requests, and overall performance.</p>
-      <div className="row">
-        {reports.map((report, index) => (
-          <div key={index} className="col-md-4 mb-3">
-            <Card>
-              <Card.Body>
-                <Card.Title>{report.title}</Card.Title>
-                <Card.Text>{report.description}</Card.Text>
-                <Button variant="primary" className="me-2" onClick={() => handleExport('CSV', report.title)}>Export CSV</Button>
-                <Button variant="secondary" onClick={() => handleExport('PDF', report.title)}>Export PDF</Button>
-              </Card.Body>
-            </Card>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default Reports;
+// export default SimpleReportCard;
