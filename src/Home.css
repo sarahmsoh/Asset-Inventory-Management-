@@ -1,0 +1,62 @@
+/* Home Page Styling */
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff; /* White Background */
+    text-align: center;
+  }
+
+  .home-content {
+    max-width: 600px;
+    padding: 40px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+
+  .home-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .home-btn {
+    padding: 12px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .signup-btn {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .signup-btn:hover {
+    background-color: #388e3c;
+  }
+
+  .login-btn {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .login-btn:hover {
+    background-color: #0056b3;
+  }

@@ -3,6 +3,17 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { FaUserCircle, FaSignOutAlt, FaTachometerAlt, FaUsers, FaBox, FaFileAlt, FaHistory, FaCog } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { logout } from '../redux/authSlice';
+
+import { useNavigate } from 'react-router-dom';
+import { 
+  FaTachometerAlt, 
+  FaUsers, 
+  FaCube, 
+  FaEnvelope, 
+  FaClipboardList, 
+  FaCogs, 
+  FaChartBar 
+} from 'react-icons/fa';
 import './Sidebar.css';
 
 
@@ -13,63 +24,66 @@ const Sidebar = () => {
   // Replace with dynamic user data if available
   const userName = "John Doe";
 
-  const handleLogout = () => {
-    dispatch(logout());
-    localStorage.removeItem('token');
-    navigate('/login');
-  };
-
   return (
-    <div className="d-flex flex-column vh-100 bg-light">
-      {/* Navigation Items */}
-      <div className="p-3 flex-grow-1">
-        <ul className="nav flex-column">
-          <li className="nav-item mb-2">
-            <NavLink to="/admin/dashboard" className="nav-link">
-              <FaTachometerAlt className="me-2" />
-              Dashboard
-            </NavLink>
-          </li>
-          <li className="nav-item mb-2">
-            <NavLink to="/admin/users" className="nav-link">
-              <FaUsers className="me-2" />
-              Users
-            </NavLink>
-          </li>
-          <li className="nav-item mb-2">
-            <NavLink to="/admin/assets" className="nav-link">
-              <FaBox className="me-2" />
-              Assets
-            </NavLink>
-          </li>
-          <li className="nav-item mb-2">
-            <NavLink to="/admin/requests" className="nav-link">
-              <FaFileAlt className="me-2" />
-              Requests
-            </NavLink>
-          </li>
-          <li className="nav-item mb-2">
-            <NavLink to="/admin/system-config" className="nav-link">
-              <FaCog className="me-2" />
-              System Config
-            </NavLink>
-          </li>
-        </ul>
-      </div>
 
-      {/* Profile Section at the Bottom */}
-      <div className="p-3 border-top">
-        <div className="d-flex align-items-center">
-          <FaUserCircle size={40} className="me-2" />
-          <div className="flex-grow-1">
-            <div className="fw-bold">{userName}</div>
-            <button onClick={handleLogout} className="btn btn-sm btn-danger mt-1">
-              <FaSignOutAlt className="me-1" />
-              Logout
-            </button>
-          </div>
-        </div>
+    <div className="sidebar d-flex flex-column vh-100 border-end bg-light position-fixed">
+      <div className="p-3 sidebar-header">
+        <h4>Admin Panel</h4>
       </div>
+      <ul className="nav nav-pills flex-column mb-auto p-3">
+        <li className="nav-item mb-2">
+          <Link to="/admin/dashboard" className="nav-link">
+            <FaTachometerAlt className="me-2" />
+            <span className="link-text">Dashboard</span>
+          </Link>
+        </li>
+        <li className="nav-item mb-2">
+          <Link to="/admin/users" className="nav-link">
+            <FaUsers className="me-2" />
+            <span className="link-text">Manage Users</span>
+          </Link>
+        </li>
+        <li className="nav-item mb-2">
+          <Link to="/admin/assets" className="nav-link">
+            <FaCube className="me-2" />
+            <span className="link-text">Manage Assets</span>
+          </Link>
+        </li>
+        <li className="nav-item mb-2">
+          <Link to="/admin/requests" className="nav-link">
+            <FaEnvelope className="me-2" />
+            <span className="link-text">Requests</span>
+          </Link>
+        </li>
+        <li className="nav-item mb-2">
+          <Link to="/admin/audit-logs" className="nav-link">
+            <FaClipboardList className="me-2" />
+            <span className="link-text">Audit Logs</span>
+          </Link>
+        </li>
+        <li className="nav-item mb-2">
+          <Link to="/admin/system-config" className="nav-link">
+            <FaCogs className="me-2" />
+            <span className="link-text">System Config</span>
+          </Link>
+        </li>
+        <li className="nav-item mb-2">
+          <Link to="/admin/reports" className="nav-link">
+            <FaChartBar className="me-2" />
+            <span className="link-text">Reports</span>
+          </Link>
+        </li>
+      </ul>
+      {/*
+      <div className="p-3 mt-auto">
+        <button onClick={() => {
+          dispatch(logout());
+          navigate('/login');
+        }} className="btn btn-danger w-100">
+          Logout
+        </button>
+      </div>
+      */}
     </div>
   );
 };

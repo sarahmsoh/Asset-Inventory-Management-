@@ -2,19 +2,25 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logout } from '../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
-import AppNavbar from './Navbar';
-import { FaSearch, FaUserCircle } from 'react-icons/fa';
+
+import Navbar from './Navbar';
+import { FaSearch, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import './Header.css';
+
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState('');
+
+  const [showDashboard, setShowDashboard] = useState(false);
+
 
   const handleLogout = () => {
     dispatch(logout());
     localStorage.removeItem('token');
     navigate('/login');
   };
+
 
   // You might fetch this from your user state; for now, it's hardcoded.
   const userName = "John Doe";
@@ -68,12 +74,15 @@ const Header = () => {
             <button onClick={handleLogout} className="btn btn-danger">
               Logout
             </button>
+
           </div>
         </div>
 
         {/* Navigation Bar */}
         <AppNavbar />
       </div>
+      
+      
     </header>
   );
 };
