@@ -25,11 +25,6 @@ form {
     margin-top: 60px;
   }
   
-  /* Form Fields */
-  div {
-    margin-bottom: 15px;
-    margin-top: 50px;
-  }
   
   /* Labels */
   label {
@@ -46,7 +41,7 @@ form {
     font-size: 14px;
     border-radius: 4px;
     border: 1px solid #ccc;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
   }
   
   select:focus, input[type="number"]:focus {

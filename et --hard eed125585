@@ -1,0 +1,19 @@
+[33meed125585[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mAIM-4-Managers-Form[m[33m, [m[1;31morigin/Alex-branch[m[33m, [m[1;31morigin/AIM-4-Managers-Form[m[33m)[m HEAD@{0}: checkout: moving from Alex-branch to AIM-4-Managers-Form
+[33me0ea2aa68[m[33m ([m[1;32mAlex-branch[m[33m)[m HEAD@{1}: commit: componets adjusted
+[33md29fa6235[m HEAD@{2}: commit: AIM-4 updated dashboard
+[33ma54cf228c[m HEAD@{3}: commit: changes for requrement
+[33meed125585[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mAIM-4-Managers-Form[m[33m, [m[1;31morigin/Alex-branch[m[33m, [m[1;31morigin/AIM-4-Managers-Form[m[33m)[m HEAD@{4}: checkout: moving from development to Alex-branch
+[33m7f6a5edab[m[33m ([m[1;32mdevelopment[m[33m)[m HEAD@{5}: checkout: moving from Alex-branch to development
+[33meed125585[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mAIM-4-Managers-Form[m[33m, [m[1;31morigin/Alex-branch[m[33m, [m[1;31morigin/AIM-4-Managers-Form[m[33m)[m HEAD@{6}: commit: updating
+[33m54df78e42[m HEAD@{7}: commit: change on the Request Managemt
+[33m44d977578[m HEAD@{8}: commit: changing Requests Form
+[33m0832f7e15[m HEAD@{9}: checkout: moving from Alex-branch to Alex-branch
+[33m0832f7e15[m HEAD@{10}: commit: changing componets for routing
+[33mf88198399[m HEAD@{11}: commit: all components working well
+[33mb07232586[m HEAD@{12}: pull origin Alex-branch --rebase (finish): returning to refs/heads/Alex-branch
+[33mb07232586[m HEAD@{13}: pull origin Alex-branch --rebase (pick): required components
+[33m702bbe6c8[m HEAD@{14}: pull origin Alex-branch --rebase (pick): part of the code working
+[33m8a0b9dd0f[m[33m ([m[1;31morigin/Sarah-branch[m[33m)[m HEAD@{15}: pull origin Alex-branch --rebase (start): checkout 8a0b9dd0fe5dc2da7be3231bcb3c408bf98057b8
+[33mefa09c2d2[m HEAD@{16}: commit: required components
+[33mbb0d15939[m[33m ([m[1;32morigin/Alex-branch[m[33m)[m HEAD@{17}: checkout: moving from origin/Alex-branch to Alex-branch
+[33mbb0d15939[m[33m ([m[1;32morigin/Alex-branch[m[33m)[m HEAD@{18}: commit (initial): part of the code working

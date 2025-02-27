@@ -99,6 +99,7 @@ const AllocationForm = ({ onAllocationSuccess }) => {
         <button type="submit">Allocate Asset</button>
       </form>
     </div>
+    
   );
 };
 
