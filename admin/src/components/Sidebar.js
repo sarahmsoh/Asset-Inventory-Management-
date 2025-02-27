@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { FaUserCircle, FaSignOutAlt, FaTachometerAlt, FaUsers, FaBox, FaFileAlt, FaHistory, FaCog } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { logout } from '../redux/authSlice';
+
 import { useNavigate } from 'react-router-dom';
 import { 
   FaTachometerAlt, 
@@ -14,11 +16,16 @@ import {
 } from 'react-icons/fa';
 import './Sidebar.css';
 
+
 const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
+  // Replace with dynamic user data if available
+  const userName = "John Doe";
 
   return (
+
     <div className="sidebar d-flex flex-column vh-100 border-end bg-light position-fixed">
       <div className="p-3 sidebar-header">
         <h4>Admin Panel</h4>

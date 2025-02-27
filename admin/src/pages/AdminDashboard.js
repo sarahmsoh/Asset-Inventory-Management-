@@ -6,7 +6,7 @@ import PriorityRequests from './AdminDashboard/PriorityRequests';
 import AssetDistribution from './AdminDashboard/AssetDistribution';
 import QuickActions from './AdminDashboard/QuickActions';
 import CriticalAlerts from './AdminDashboard/CriticalAlerts';
-import ActivityLog from './AdminDashboard/ActivityLog';
+// import ActivityLog from './AdminDashboard/ActivityLog';
 import AssetInventory from './AdminDashboard/AssetInventory';
 import FinancialInsights from './AdminDashboard/FinancialInsights';
 import ReportingExport from './AdminDashboard/ReportingExport';
@@ -70,19 +70,19 @@ const AdminDashboard = () => {
           <MaintenanceSchedule assets={assets} />
         </Col>
       </Row>
-      <Row className="mt-4">
+      {/* <Row className="mt-4">
         <Col lg={6}>
           <FinancialInsights assets={assets} />
         </Col>
         <Col lg={6}>
           <ReportingExport />
         </Col>
-      </Row>
-      <Row className="mt-4">
+      </Row> */}
+      {/* <Row className="mt-4">
         <Col xs={12}>
           <ActivityLog activities={[]} />
         </Col>
-      </Row>
+      </Row> */}
     </div>
   );
 };
